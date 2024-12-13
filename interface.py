@@ -17,7 +17,6 @@ class InterfaceGUI:
         self.gestion_vaccins = gestion_vaccins
         self.gestion_alertes = gestion_alertes
         self.root = tk.Tk()
-        self.root.title("Gestion de Cheptel")
         self.label = tk.Label(self.root, text="Bienvenue dans l'interface de gestion")
         self.label.pack(padx=20, pady=20)
 

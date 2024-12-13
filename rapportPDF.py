@@ -29,6 +29,36 @@ class RapportPDF:
 
         self.exporter_pdf("rapport_cheptel.pdf")
 
+    def generate_vaccination_report(self):
+        """Génère un rapport des vaccinations en format PDF."""
+        try:
+            vaccins = self.gestion_vaccins.consulter_vaccins()
+            self.ajouter_texte("Rapport des Vaccinations")
+            
+            for vaccin in vaccins:
+                self.ajouter_texte(f"ID: {vaccin[0]}, ID Animal: {vaccin[1]}, Nom du Vaccin: {vaccin[2]}")
+                self.ajouter_texte(f"    - Date du Vaccin: {vaccin[3]}, Date du Prochain Rappel: {vaccin[4]}")
+
+            self.exporter_pdf("rapport_vaccinations.pdf")
+            print("Rapport des vaccinations généré avec succès : rapport_vaccinations.pdf")
+        except Exception as e:
+            print(f"Erreur lors de la génération du rapport des vaccinations : {e}")
+    
+    def generate_animal_report(self):
+        """Génère un rapport des animaux en format PDF."""
+        try:
+            animaux = self.gestion_animaux.consulter_animal()
+            self.ajouter_texte("Rapport des Animaux")
+            
+            for animal in animaux:
+                self.ajouter_texte(f"ID: {animal[0]}, Nom: {animal[1]}, Race: {animal[2]}, Âge: {animal[3]}")
+
+            self.exporter_pdf("rapport_animaux.pdf")
+            print("Rapport des animaux généré avec succès : rapport_animaux.pdf")
+        except Exception as e:
+            print(f"Erreur lors de la génération du rapport des animaux : {e}")
+
+
     def exporter_pdf(self, nom_fichier):
         """Sauvegarde le PDF sous le nom spécifié."""
         self.pdf.output(nom_fichier)
